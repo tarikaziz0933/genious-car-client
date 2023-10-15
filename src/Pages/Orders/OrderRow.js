@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
-const OrderRow = ({ order }) => {
-    const { _id, serviceName, phone, customer, price, email, service } = order;
+const OrderRow = ({ order, handleDelete, handleStatusUpdate }) => {
+    const { _id, serviceName, phone, customer, price, email, service, status } = order;
     const [orderService, setOrderService] = useState([]);
     // console.log(orderService);
 
@@ -11,18 +11,7 @@ const OrderRow = ({ order }) => {
             .then(data => setOrderService(data))
     }, [service])
 
-    const handleDelete = id => {
-        const proceed = window.confirm('Are yousure to delete?');
-        if (proceed) {
-            fetch(`http://localhost:5000/orders/${id}`, {
-                method: 'DELETE'
-            })
-                .then(res => res.json())
-                .then(data => {
-                    console.log(data);
-                })
-        }
-    }
+
 
     return (
         <tr>
@@ -54,7 +43,7 @@ const OrderRow = ({ order }) => {
             </td>
             <td>{email}</td>
             <th>
-                <button className="btn btn-ghost btn-xs">details</button>
+                <button onClick={() => handleStatusUpdate(_id)} className="btn btn-ghost btn-xs">{status ? status : 'pending'}</button>
             </th>
         </tr>
     );

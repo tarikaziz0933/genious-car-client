@@ -8,7 +8,12 @@ const Header = () => {
 
     const menuItems = <>
         <li className='font-semibold'><Link to="/">Home</Link></li>
+        {
+            user?.uid &&
+            <li className='font-semibold'><Link to="/orders">Orders</Link></li>
+        }
         <li className='font-semibold'><Link to="/orders">Orders</Link></li>
+
         <li className='font-semibold'><Link to="/login">Login</Link></li>
     </>
     return (
@@ -42,7 +47,8 @@ const Header = () => {
                         :
                         <>
                             <Link to="/login">LogIn</Link>
-                            <Link to="/signup">Sign Up</Link></>
+                            <Link to="/signup">Sign Up</Link>
+                        </>
                 }
             </div>
         </div>

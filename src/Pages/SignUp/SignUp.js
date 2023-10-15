@@ -16,6 +16,7 @@ const SignUp = () => {
 
         if (password.length < 6) {
             setError('Password should be six  or more');
+            console.log(error);
             return;
         }
 
